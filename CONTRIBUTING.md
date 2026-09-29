@@ -15,6 +15,16 @@
 - `make dev` brings everything up from a fresh clone. It runs `docker compose up`; the services are in `compose.yaml`. `make down` stops and removes them.
 - Config comes from `.env`, which is not committed. Copy `.env.example` to start. It lists every variable with a safe local default; add a line there when the code reads a new one.
 
+## Code
+
+Review checks these. Nothing else does.
+
+- Strictest mode the language has. An escape hatch (`any`, `unsafe`, `type: ignore`) means the type isn't understood yet. The linter rejects them.
+- Explicit names. The name says what the thing does, not how it was built.
+- Focused files. A big file is usually a file doing more than one thing.
+- Comments explain why. What is already in the code; if it isn't, fix the code.
+- Errors are handled where there is something to do about them, otherwise they propagate. Queues fail, databases go down, networks flap; the sad path is part of the feature.
+
 ## Quality gate
 
 - `make check` runs the whole gate. CI runs the same target, so green locally means green in CI.
