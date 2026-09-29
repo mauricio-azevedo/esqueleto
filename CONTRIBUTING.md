@@ -47,6 +47,8 @@ Review checks these too.
 - The name states the behavior: `rejects an expired token`, not `testValidate`. A failure should say what broke without opening the file.
 - Real dependencies, not mocks of them. A database test runs against a database that the test starts itself with testcontainers, so `make test` needs nothing running and each run starts clean. Mocks belong at boundaries we don't own.
 - Fast and deterministic. No sleeps, no real network, no order dependence. A flaky test is fixed or deleted the day it flakes, never retried.
+- Each kind is owed when its risk exists. Unit: always. Integration: the code touches a database, filesystem, broker or service. Contract: two independently deployed services call each other. E2E: critical paths through the whole system, few. Load: throughput or latency is a requirement. Chaos: availability is; at minimum, a test that kills a dependency and checks the sad path.
+- Unit, integration and contract run in `make check`. E2E runs there while it stays fast, otherwise on `main`. Load and chaos run on a schedule or before a release, never in the PR gate.
 
 ## Observability
 
