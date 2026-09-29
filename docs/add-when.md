@@ -1,0 +1,14 @@
+# Add when
+
+Things this repo does not do yet, each with the trigger that makes it owed. When a change fires a trigger, the PR says so and does what the entry says, or its Design section says why not.
+
+- **Dependency audit.** When: the repo has a dependency manifest. What: a `make audit` target under `make check` that fails on known vulnerabilities: `npm audit`, `pip-audit`, `cargo audit`, `govulncheck`. Source: OpenSSF Scorecard, "Vulnerabilities".
+- **Dependency review on PRs.** When: the repo is on GitHub with a manifest. What: GitHub's `dependency-review-action` as a required check; it fails a PR that adds a dependency with a known vulnerability. Source: GitHub Docs, dependency review.
+- **Static security analysis.** When: the first real code. What: CodeQL default setup, a repo setting, or Semgrep under `make lint`. Source: OWASP ASVS V1; NIST SSDF PW.7.
+- **Delta coverage.** When: the first `test` body exists. What: a gate on coverage of the lines changed in the PR, not the global number; a global threshold gets gamed. Tools: `diff-cover`, Codecov patch status. Source: project policy.
+- **API spec lint and breaking-change diff.** When: the first real path in `api/openapi.yaml`. What: Spectral under `make lint`; the `api-diff` body runs oasdiff against `main` and fails on a breaking change unless `PR_TITLE` matches `^[a-z]+(\([^)]*\))?!:`. The `check` workflow already provides full history and `PR_TITLE`. Source: Conventional Commits.
+- **AsyncAPI.** When: the first event is published to a broker. What: `api/asyncapi.yaml` describes channels and messages the way `openapi.yaml` describes paths; same lint, same breaking-change rule. Source: AsyncAPI.
+- **Container image scanning.** When: the first `make deploy`. What: scan-on-push in the registry, a platform setting; base images accrue CVEs between Dependabot bumps. Source: SLSA; OWASP Docker cheat sheet.
+- **Image provenance.** When: an image is built in CI, which is ADR 0004 accepted. What: `actions/attest-build-provenance` in the workflow that builds the image, SLSA Build L2, L3 in a reusable workflow; `gh attestation verify` checks it; the cluster admits only attested images. Source: SLSA v1.2 Build track; NIST SSDF PS.3.
+- **LLM evals.** When: the code calls a language model. What: an eval suite under `make test` with prompts and model ids committed; a prompt change is a behavior change and is tested like one. Source: project policy.
+- **Automatic releases.** When: something is actually released. What: release-please reads commit types on `main`, keeps a release PR open with the version and `CHANGELOG.md`, tags on merge. Needs a GitHub App token, since PRs opened by `GITHUB_TOKEN` trigger no workflows. Dependabot prefixes then decide what ships: `fix` on production dependencies and base images, `chore` on development ones, `ci` on actions. Source: Conventional Commits; SemVer.
