@@ -76,7 +76,7 @@ Review checks these too.
 - Nothing goes to production before `docs/production-readiness.md` is walked. Every box is checked or says why not.
 - An ADR that changes the architecture walks it again. The checklist is the gate for operations the way `make check` is for code.
 - Everything deploys on AWS. The [Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/) is the reference for how; its review is part of the checklist.
-- `make deploy` builds the image from `Dockerfile`, pushes it to `REGISTRY`, and installs the Helm chart in `deploy/` on the shared EKS cluster, one namespace per project. The cluster is Terraform in the platform repo; a project never touches it.
+- `make deploy` builds the image from `Dockerfile`, pushes it to `REGISTRY`, and installs the Helm chart in `deploy/` on the platform's cluster, in this service's namespace. The cluster belongs to the platform; this repo never touches it.
 
 ## Quality gate
 

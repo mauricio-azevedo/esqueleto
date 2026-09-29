@@ -16,4 +16,4 @@ The service never touches the cluster itself; it only owns its namespace. Helm i
 
 ## Revisit when
 
-The service needs something a namespace cannot give it, such as its own network or its own account. Then it leaves the shared cluster, and this ADR is superseded by the one that says where it went.
+The service needs something a namespace cannot give it, such as its own network or its own account. Then it leaves the platform cluster, and this ADR is superseded by the one that says where it went.

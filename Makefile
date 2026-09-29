@@ -47,5 +47,5 @@ push: image ## push the image to REGISTRY
 	@test -n "$(REGISTRY)" || { echo "REGISTRY is not set; see .env.example"; exit 1; }
 	docker push $(IMAGE):$(TAG)
 
-deploy: push ## deploy this commit to the shared cluster
+deploy: push ## deploy this commit to the platform cluster
 	helm upgrade --install $(APP) deploy/ --namespace $(APP) --create-namespace --set image.repository=$(IMAGE) --set image.tag=$(TAG) --wait

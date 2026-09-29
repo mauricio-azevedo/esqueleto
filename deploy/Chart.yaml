@@ -1,5 +1,5 @@
 apiVersion: v2
 name: app
-description: One service on the shared cluster. Release name is the project name.
+description: This service on the platform cluster. Release name is the service name.
 type: application
 version: 0.1.0
