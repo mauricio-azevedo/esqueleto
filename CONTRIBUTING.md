@@ -5,14 +5,20 @@
 - Trunk-based. Branch from `main`.
 - `main` is always deployable. Every merge could go to production; the gate, squash and short branches exist to keep that true.
 - Unfinished work merges behind a feature flag, off by default. A change that takes days still merges on day one.
-- Small PRs, readable in fifteen minutes. Review within a day; turnaround is what decides whether branches live a day or a week.
-- With one person on the project, review is self-review plus an agent review, and the ruleset requires CI only. With a team, one approval.
+- Small PRs, readable in fifteen minutes.
 - Every branch starts from an issue. Use "Create a branch" in the issue sidebar, or `gh issue develop <number> --checkout`. Either way the branch is linked, so the PR closes the issue on merge.
 - Issues use the forms in `.github/ISSUE_TEMPLATE/`. Blank issues are off, so every issue has what's needed to act on it.
 - Squash only. Merge commits and rebase merges are disabled in repo settings.
 - PR title is a [Conventional Commit](https://www.conventionalcommits.org/): `type(scope): summary`. It becomes the squash commit message, so it is the only line that survives. `!` marks a breaking change: a correct caller would fail.
 - CI checks the PR title with [action-semantic-pull-request](https://github.com/amannn/action-semantic-pull-request).
 - PR body comes from `.github/pull_request_template.md`.
+
+## Review
+
+- Approve when the change improves the overall health of the codebase, even if it isn't perfect. Block only on what the sections below require. Reference: [Google's code review guide](https://google.github.io/eng-practices/review/).
+- Look in this order: design, behavior, complexity, tests, naming, comments, style. A review that starts at style never reaches design.
+- Every comment says why. Optional ones start with `Nit:` so the author knows they don't block. Within a business day, or say when.
+- With one person on the project, review is self-review plus an agent review, and the ruleset requires CI only. With a team, one approval.
 
 ## Running locally
 

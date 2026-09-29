@@ -13,3 +13,7 @@ Before finishing:
 6. A decision that is hard to reverse gets an ADR in the same PR, with "Revisit when" filled.
 7. A change to auth, sessions, input handling, crypto or secrets is checked against the relevant OWASP ASVS chapter and cheat sheet, and the PR's Security section names what was checked.
 8. Say what you did and what you did not verify.
+
+When reviewing:
+
+9. Approve when the change improves the overall health of the codebase. Block only on what `CONTRIBUTING.md` requires. Say why on every comment; `Nit:` on the optional ones.
