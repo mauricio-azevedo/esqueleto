@@ -15,6 +15,7 @@
 - `make check` runs the whole gate. CI runs the same target, so green locally means green in CI.
 - Each step is its own target: `make fmt`, `make lint`, `make typecheck`, `make test`, `make build`. Run one while iterating, `check` before pushing.
 - `make fmt` rewrites files; `check` runs `fmt-check` instead. Everything under `check` only verifies and fails if it would change something; CI never rewrites.
+- `make` alone lists the targets.
 - `make check` is the contract. Add a step by adding a target and putting it under `check`; don't add steps to CI that aren't in `check`.
 
 ## CI

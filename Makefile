@@ -1,21 +1,24 @@
-.PHONY: check fmt fmt-check lint typecheck test build
+.PHONY: help check fmt fmt-check lint typecheck test build
 
-check: fmt-check lint typecheck test build
+help: ## list targets
+	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{ printf "  %-10s %s\n", $$1, $$2 }'
 
-fmt:
+check: fmt-check lint typecheck test build ## run the whole gate
+
+fmt: ## rewrite files with the formatter
 	@echo "fmt: nothing configured"
 
-fmt-check:
+fmt-check: ## fail if fmt would change anything
 	@echo "fmt-check: nothing configured"
 
-lint:
+lint: ## static checks
 	@echo "lint: nothing configured"
 
-typecheck:
+typecheck: ## type checks
 	@echo "typecheck: nothing configured"
 
-test:
+test: ## run tests
 	@echo "test: nothing configured"
 
-build:
+build: ## build artifacts
 	@echo "build: nothing configured"
