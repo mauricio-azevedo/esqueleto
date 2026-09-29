@@ -104,7 +104,7 @@ Review checks these too.
 - Each step is its own target: `make fmt`, `make lint`, `make typecheck`, `make test`, `make build`, `make api-diff`. Run one while iterating, `check` before pushing.
 - `make fmt` rewrites files; `check` runs `fmt-check` instead. Everything under `check` only verifies and fails if it would change something; CI never rewrites.
 - A failing check is fixed, not silenced. No skipped test, no lint-disable comment, no deleted assertion, no `--no-verify`. Green earned that way is red with a lie on top.
-- A target that prints "nothing configured" is a stub, and so is the Dockerfile's build stage. Each is filled before the first PR; until then `check` is green and checks nothing, and `make dev` cannot build the image.
+- A target that prints "nothing configured" is a stub, and so is the Dockerfile's build stage. Each is filled before the first PR that adds code; until then `check` is green and checks nothing, and `make dev` cannot build the image.
 - `make` alone lists the targets.
 - `make check` is the PR gate. Add a step by adding a target and putting it under `check`. A CI job outside `check` says why it is outside: the title check reads the PR, not the code; a scheduled job runs on time, not on a PR.
 

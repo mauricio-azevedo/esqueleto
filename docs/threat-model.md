@@ -1,6 +1,6 @@
 # Threat model
 
-Filled when the first real component exists, revised when a boundary changes. Reference: [OWASP Threat Modeling Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html).
+What we hold and Who attacks are filled on the first day; the rest when the first real component exists, revised when a boundary changes. Reference: [OWASP Threat Modeling Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html).
 
 ## What we hold
 
