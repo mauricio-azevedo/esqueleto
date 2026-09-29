@@ -52,6 +52,7 @@ Review checks these too.
 - Errors are logged once, where they stop. A layer that can't handle an error passes it up without logging it.
 - No secrets, no personal data in logs. Redact at the logger, not at each call site.
 - `/healthz` says the process is up; `/readyz` says its dependencies are reachable.
+- An alert isn't done until its entry in `docs/runbook.md` exists: what it detects, what to check, the usual fix.
 
 ## Quality gate
 
