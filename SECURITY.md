@@ -4,4 +4,4 @@ Report a vulnerability privately: Security tab → Report a vulnerability. Don't
 
 You get a reply within 3 business days. The fix and the affected versions are published in the advisory.
 
-This repository follows the [OpenSSF OSPS Baseline](https://baseline.openssf.org/), Level 1.
+As of <date>, this project complies with [OpenSSF OSPS Baseline](https://baseline.openssf.org/) version 2026.08.28, Level 1.
