@@ -17,7 +17,7 @@
 
 ## Releases
 
-- Version and `CHANGELOG.md` come from [release-please](https://github.com/googleapis/release-please), computed from the commit types on `main`. `fix` bumps patch, `feat` bumps minor, `!` after the type or a `BREAKING CHANGE:` footer bumps major. Other types don't bump.
+- Version and `CHANGELOG.md` come from [release-please](https://github.com/googleapis/release-please), computed from the commit types on `main`. `fix` bumps patch, `feat` bumps minor, `!` after the type or a `BREAKING CHANGE:` footer bumps major. Before 1.0, breaking bumps minor and `feat` bumps patch. Other types don't bump.
 - release-please keeps one release PR open and updates it on every merge to `main`. Merging that PR tags the release and publishes the GitHub release. Until then, everything on `main` is unreleased.
 - Don't edit the version or the changelog by hand. The next release PR overwrites both.
 - Nothing to release? Don't merge the release PR. It waits.
