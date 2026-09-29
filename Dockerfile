@@ -4,13 +4,13 @@
 # Base images are pinned by digest, tag in a comment, for the same reason actions are pinned by SHA.
 
 # alpine:3.22
-FROM alpine@sha256:5291449c3df73caf6ed85e649dec1b9e818b39a5d8c871e97afc13e9cd5e8fa8 AS build
+FROM alpine@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6 AS build
 WORKDIR /src
 COPY . .
 # build here; produce /src/out/app
 
 # alpine:3.22
-FROM alpine@sha256:5291449c3df73caf6ed85e649dec1b9e818b39a5d8c871e97afc13e9cd5e8fa8
+FROM alpine@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6
 RUN adduser -D -u 10001 app
 USER 10001
 WORKDIR /app
