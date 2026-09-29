@@ -11,4 +11,5 @@ Before finishing:
 4. Run `make check`. Green is the bar. Don't report done on red.
 5. Tests are part of the change, sad path included. `make test-unit` is the loop.
 6. A decision that is hard to reverse gets an ADR in the same PR, with "Revisit when" filled.
-7. Say what you did and what you did not verify.
+7. A change to auth, sessions, input handling, crypto or secrets is checked against the relevant OWASP ASVS chapter and cheat sheet, and the PR's Security section names what was checked.
+8. Say what you did and what you did not verify.

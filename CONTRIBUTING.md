@@ -31,6 +31,7 @@ Review checks these. Nothing else does.
 - Errors are handled where there is something to do about them, otherwise they propagate. Queues fail, databases go down, networks flap; the sad path is part of the feature.
 - Adding a dependency is a decision: license, maintenance, size. A large one gets an ADR.
 - Schema migrations live in the PR, run forward only, and work with the version still running. Add, deploy, backfill; drop in a later PR.
+- Anything that takes input from the internet meets [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/) Level 1; anything holding personal data, Level 2. `docs/threat-model.md` says where the boundaries are.
 
 ## Decisions
 
@@ -60,6 +61,7 @@ Review checks these too.
 - Levels mean something. `error`: someone acts. `warn`: degraded, self-healed. `info`: a business event happened. `debug`: off outside development.
 - Errors are logged once, where they stop. A layer that can't handle an error passes it up without logging it.
 - No secrets, no personal data in logs. Redact at the logger, not at each call site.
+- Authentication failures, access denials and privilege changes are always logged, with who and what. That is the OWASP logging baseline, and the incident timeline.
 - `/healthz` says the process is up; `/readyz` says its dependencies are reachable.
 - An alert isn't done until its entry in `docs/runbook.md` exists: what it detects, what to check, the usual fix.
 
