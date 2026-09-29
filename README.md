@@ -25,7 +25,7 @@ make check  # run the whole gate
 make        # list targets
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for branches, PRs and CI.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for how we work.
 
 ## License
 
