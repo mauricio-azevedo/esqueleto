@@ -28,6 +28,8 @@ Review checks these. Nothing else does.
 - Focused files. A big file is usually a file doing more than one thing.
 - Comments explain why. What is already in the code; if it isn't, fix the code.
 - Errors are handled where there is something to do about them, otherwise they propagate. Queues fail, databases go down, networks flap; the sad path is part of the feature.
+- Adding a dependency is a decision: license, maintenance, size. A large one gets an ADR.
+- Schema migrations live in the PR, run forward only, and work with the version still running. Add, deploy, backfill; drop in a later PR.
 
 ## Decisions
 
