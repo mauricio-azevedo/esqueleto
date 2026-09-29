@@ -42,6 +42,16 @@ Review checks these too.
 - Real dependencies, not mocks of them. A database test runs against a database that the test starts itself with testcontainers, so `make test` needs nothing running and each run starts clean. Mocks belong at boundaries we don't own.
 - Fast and deterministic. No sleeps, no real network, no order dependence. A flaky test is fixed or deleted the day it flakes, never retried.
 
+## Observability
+
+- Structured logs to stdout, one JSON object per line. The platform collects; the code never opens a log file.
+- One line per unit of work, at the end: who, what, how long, outcome, every field known by then. Not a narrative of steps.
+- A trace id on everything. It arrives on the request or is minted there, goes out on every call, and sits on every log line, span and metric. OpenTelemetry, so the backend is config.
+- Levels mean something. `error`: someone acts. `warn`: degraded, self-healed. `info`: a business event happened. `debug`: off outside development.
+- Errors are logged once, where they stop. A layer that can't handle an error passes it up without logging it.
+- No secrets, no personal data in logs. Redact at the logger, not at each call site.
+- `/healthz` says the process is up; `/readyz` says its dependencies are reachable.
+
 ## Quality gate
 
 - `make check` runs the whole gate. CI runs the same target, so green locally means green in CI.
