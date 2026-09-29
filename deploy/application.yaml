@@ -1,0 +1,28 @@
+# Argo CD Application for this service, for a platform that runs Argo CD (ADR 0004). This repo applies nothing;
+# the platform references this file. Chart from this repo; image tag from the platform repo's values file.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: <name>
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: <this repo's clone URL>
+      targetRevision: main
+      path: deploy
+      helm:
+        valueFiles:
+          - $platform/services/<name>/values.yaml
+    - repoURL: <platform repo's clone URL>
+      targetRevision: main
+      ref: platform
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: <name>
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

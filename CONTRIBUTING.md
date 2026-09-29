@@ -78,7 +78,7 @@ Review checks these too.
 - Nothing goes to production before `docs/production-readiness.md` is walked. Every box is checked or says why not.
 - An ADR that changes the architecture walks it again. The checklist is the gate for operations the way `make check` is for code.
 - Everything deploys on AWS. The [Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/) is the reference for how; its review is part of the checklist.
-- `make deploy` builds the image from `Dockerfile`, pushes it to `REGISTRY`, and installs the Helm chart in `deploy/` on the platform's cluster: a shared Kubernetes cluster run outside this repo by the platform, described in ADR 0003. This repo owns only its namespace there.
+- `make deploy` builds the image from `Dockerfile`, pushes it to `REGISTRY`, and installs the Helm chart in `deploy/` on the platform's cluster: a shared Kubernetes cluster run outside this repo by the platform, described in ADR 0003. This repo owns only its namespace there. If the platform runs Argo CD, deploys become commits instead and `make deploy` goes; ADR 0004 holds that decision as proposed.
 
 ## Quality gate
 
@@ -86,7 +86,7 @@ Review checks these too.
 - Each step is its own target: `make fmt`, `make lint`, `make typecheck`, `make test`, `make build`, `make api-diff`. Run one while iterating, `check` before pushing.
 - `make fmt` rewrites files; `check` runs `fmt-check` instead. Everything under `check` only verifies and fails if it would change something; CI never rewrites.
 - `make` alone lists the targets.
-- `make check` is the contract. Add a step by adding a target and putting it under `check`; don't add steps to CI that aren't in `check`.
+- `make check` is the contract. Add a step by adding a target and putting it under `check`; don't add steps to CI that aren't in `check`. The PR title check is the one exception: it reads the PR, not the code.
 
 ## CI
 
