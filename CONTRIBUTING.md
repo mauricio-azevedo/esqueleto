@@ -25,6 +25,13 @@ Review checks these. Nothing else does.
 - Comments explain why. What is already in the code; if it isn't, fix the code.
 - Errors are handled where there is something to do about them, otherwise they propagate. Queues fail, databases go down, networks flap; the sad path is part of the feature.
 
+## Decisions
+
+- A decision that is hard to reverse, or that a newcomer would ask "why?" about, gets an ADR in `docs/adr/`, in the PR that makes it. Database, sync or async, how services talk. Not naming, not formatting.
+- One file per decision, numbered, from `docs/adr/template.md`. Accepted ADRs are not edited; a change of mind is a new ADR that supersedes the old one, and the old one's status points forward.
+- Context, decision, consequences, and what would change it, under a page. "Revisit when" is required: a decision that no evidence could overturn is a preference.
+- CONTRIBUTING holds how we work. ADRs hold why the system is shaped the way it is.
+
 ## Testing
 
 Review checks these too.
