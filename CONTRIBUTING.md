@@ -65,6 +65,11 @@ Review checks these too.
 - `/healthz` says the process is up; `/readyz` says its dependencies are reachable.
 - An alert isn't done until its entry in `docs/runbook.md` exists: what it detects, what to check, the usual fix.
 
+## Production
+
+- Nothing goes to production before `docs/production-readiness.md` is walked. Every box is checked or says why not.
+- An ADR that changes the architecture walks it again. The checklist is the gate for operations the way `make check` is for code.
+
 ## Quality gate
 
 - `make check` runs the whole gate. CI runs the same target, so green locally means green in CI.
