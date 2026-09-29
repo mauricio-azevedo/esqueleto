@@ -6,6 +6,7 @@
 - `main` is always deployable. Every merge could go to production; the gate, squash and short branches exist to keep that true.
 - Unfinished work merges behind a feature flag, off by default. A change that takes days still merges on day one.
 - Small PRs, readable in fifteen minutes. Review within a day; turnaround is what decides whether branches live a day or a week.
+- With one person on the project, review is self-review plus an agent review, and the ruleset requires CI only. With a team, one approval.
 - Every branch starts from an issue. Use "Create a branch" in the issue sidebar, or `gh issue develop <number> --checkout`. Either way the branch is linked, so the PR closes the issue on merge.
 - Issues use the forms in `.github/ISSUE_TEMPLATE/`. Blank issues are off, so every issue has what's needed to act on it.
 - Squash only. Merge commits and rebase merges are disabled in repo settings.
