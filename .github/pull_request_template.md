@@ -6,7 +6,7 @@ Closes #
 
 ## Design
 
-<Spans more than one process, datastore or external system? For each question in `docs/design-checklist.md`: the answer, or "n/a" and why. Otherwise delete this section.>
+<Spans more than one process, datastore or external system, or touches shared mutable state? For each question in `docs/design-checklist.md` that the change owes: the answer, or "n/a" and why. Otherwise delete this section.>
 
 ## Security
 
