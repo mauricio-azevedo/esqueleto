@@ -25,6 +25,16 @@ Review checks these. Nothing else does.
 - Comments explain why. What is already in the code; if it isn't, fix the code.
 - Errors are handled where there is something to do about them, otherwise they propagate. Queues fail, databases go down, networks flap; the sad path is part of the feature.
 
+## Testing
+
+Review checks these too.
+
+- Tests are part of the change. A PR that changes behavior changes tests in the same PR, sad path included.
+- Test behavior, not implementation. A test that fails on a refactor that changed no behavior is testing the wrong thing.
+- The name states the behavior: `rejects an expired token`, not `testValidate`. A failure should say what broke without opening the file.
+- Real dependencies, not mocks of them. A database test runs against a database; `compose.yaml` has one. Mocks belong at boundaries we don't own.
+- Fast and deterministic. No sleeps, no real network, no order dependence. A flaky test is fixed or deleted the day it flakes, never retried.
+
 ## Quality gate
 
 - `make check` runs the whole gate. CI runs the same target, so green locally means green in CI.
