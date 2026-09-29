@@ -37,8 +37,8 @@ Review checks these. Nothing else does.
 - Errors are handled where there is something to do about them, otherwise they propagate. Queues fail, databases go down, networks flap; the sad path is part of the feature.
 - Adding a dependency is a decision: license, maintenance, size. A large one gets an ADR.
 - Schema migrations live in the PR, run forward only, and work with the version still running. Add, deploy, backfill; drop in a later PR.
-- The HTTP API is `api/openapi.yaml`, the contract. Written first or generated from code, it is committed, and the running service serves it at `/openapi.json` with docs at `/docs`.
-- A change to the spec that breaks a correct client is a breaking change: `!` in the PR title, and CI diffs the spec against `main` to check.
+- The HTTP API is `api/openapi.yaml`, the contract. Written first or generated from code, it is committed. The running service serves it at `/openapi.json` with docs at `/docs`; those two paths are outside the contract by convention.
+- A change to the spec that breaks a correct client is a breaking change: `!` in the PR title. `make api-diff`, under `check`, compares the spec with `main` and fails on a breaking change without the `!`.
 - Anything that takes input from the internet meets [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/) Level 1; anything holding personal data, Level 2. `docs/threat-model.md` says where the boundaries are.
 
 ## Decisions
@@ -83,7 +83,7 @@ Review checks these too.
 ## Quality gate
 
 - `make check` runs the whole gate. CI runs the same target, so green locally means green in CI.
-- Each step is its own target: `make fmt`, `make lint`, `make typecheck`, `make test`, `make build`. Run one while iterating, `check` before pushing.
+- Each step is its own target: `make fmt`, `make lint`, `make typecheck`, `make test`, `make build`, `make api-diff`. Run one while iterating, `check` before pushing.
 - `make fmt` rewrites files; `check` runs `fmt-check` instead. Everything under `check` only verifies and fails if it would change something; CI never rewrites.
 - `make` alone lists the targets.
 - `make check` is the contract. Add a step by adding a target and putting it under `check`; don't add steps to CI that aren't in `check`.

@@ -3,7 +3,7 @@ APP ?= $(notdir $(CURDIR))
 TAG ?= $(shell git rev-parse --short HEAD)
 IMAGE = $(REGISTRY)/$(APP)
 
-.PHONY: help dev dev-obs down check fmt fmt-check lint typecheck test test-unit build image push deploy
+.PHONY: help dev dev-obs down check fmt fmt-check lint typecheck test test-unit build api-diff image push deploy
 
 help: ## list targets
 	@grep -hE '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{ printf "  %-10s %s\n", $$1, $$2 }'
@@ -19,7 +19,7 @@ dev-obs: ## dev plus local logs, metrics and traces at http://localhost:3000
 down: ## stop and remove what dev brought up
 	docker compose down
 
-check: fmt-check lint typecheck test build ## run the whole gate
+check: fmt-check lint typecheck test build api-diff ## run the whole gate
 
 fmt: ## rewrite files with the formatter
 	@echo "fmt: nothing configured"
@@ -41,6 +41,9 @@ test-unit: ## run unit tests only, in seconds
 
 build: ## build artifacts
 	@echo "build: nothing configured"
+
+api-diff: ## fail on a breaking change to api/openapi.yaml vs main without ! in the PR title
+	@echo "api-diff: nothing configured"
 
 image: ## build the container image
 	docker build -t $(IMAGE):$(TAG) .
