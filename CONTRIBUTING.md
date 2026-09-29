@@ -12,7 +12,7 @@
 
 ## Running locally
 
-- `make dev` brings everything up from a fresh clone. It runs `docker compose up`; the services are in `compose.yaml`.
+- `make dev` brings everything up from a fresh clone. It runs `docker compose up`; the services are in `compose.yaml`. `make down` stops and removes them.
 - Config comes from `.env`, which is not committed. Copy `.env.example` to start. It lists every variable with a safe local default; add a line there when the code reads a new one.
 
 ## Quality gate
