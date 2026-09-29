@@ -13,6 +13,7 @@
 ## Running locally
 
 - `make dev` brings everything up from a fresh clone. It runs `docker compose up`; the services are in `compose.yaml`. `make down` stops and removes them.
+- `make dev-obs` adds a local Grafana with logs, metrics and traces at `http://localhost:3000`, fed by the same OpenTelemetry endpoint the code uses everywhere.
 - Config comes from `.env`, which is not committed. Copy `.env.example` to start. It lists every variable with a safe local default; add a line there when the code reads a new one.
 
 ## Code

@@ -4,3 +4,11 @@ services:
     env_file: .env
     ports:
       - "${APP_PORT:-8080}:8080"
+
+  otel-lgtm:
+    image: grafana/otel-lgtm:0.34.0
+    profiles: [observability]
+    ports:
+      - "3000:3000"   # Grafana
+      - "4317:4317"   # OTLP gRPC
+      - "4318:4318"   # OTLP HTTP

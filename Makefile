@@ -1,10 +1,13 @@
-.PHONY: help dev down check fmt fmt-check lint typecheck test build
+.PHONY: help dev dev-obs down check fmt fmt-check lint typecheck test build
 
 help: ## list targets
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{ printf "  %-10s %s\n", $$1, $$2 }'
 
 dev: ## bring everything up locally
 	docker compose up
+
+dev-obs: ## dev plus local logs, metrics and traces at http://localhost:3000
+	docker compose --profile observability up
 
 down: ## stop and remove what dev brought up
 	docker compose down
