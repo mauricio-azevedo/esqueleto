@@ -10,6 +10,11 @@
 - CI checks the PR title with [action-semantic-pull-request](https://github.com/amannn/action-semantic-pull-request).
 - PR body comes from `.github/pull_request_template.md`.
 
+## Running locally
+
+- `make dev` brings everything up from a fresh clone. It runs `docker compose up`; the services are in `compose.yaml`.
+- Config comes from `.env`, which is not committed. Copy `.env.example` to start. It lists every variable with a safe local default; add a line there when the code reads a new one.
+
 ## Quality gate
 
 - `make check` runs the whole gate. CI runs the same target, so green locally means green in CI.

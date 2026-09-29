@@ -1,7 +1,10 @@
-.PHONY: help check fmt fmt-check lint typecheck test build
+.PHONY: help dev check fmt fmt-check lint typecheck test build
 
 help: ## list targets
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{ printf "  %-10s %s\n", $$1, $$2 }'
+
+dev: ## bring everything up locally
+	docker compose up
 
 check: fmt-check lint typecheck test build ## run the whole gate
 

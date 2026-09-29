@@ -19,8 +19,10 @@
 ## Development
 
 ```bash
-make        # list targets
+cp .env.example .env
+make dev    # bring everything up
 make check  # run the whole gate
+make        # list targets
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for branches, PRs and CI.
