@@ -37,6 +37,8 @@ Review checks these. Nothing else does.
 - Errors are handled where there is something to do about them, otherwise they propagate. Queues fail, databases go down, networks flap; the sad path is part of the feature.
 - Adding a dependency is a decision: license, maintenance, size. A large one gets an ADR.
 - Schema migrations live in the PR, run forward only, and work with the version still running. Add, deploy, backfill; drop in a later PR.
+- The HTTP API is `api/openapi.yaml`, the contract. Written first or generated from code, it is committed, and the running service serves it at `/openapi.json` with docs at `/docs`.
+- A change to the spec that breaks a correct client is a breaking change: `!` in the PR title, and CI diffs the spec against `main` to check.
 - Anything that takes input from the internet meets [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/) Level 1; anything holding personal data, Level 2. `docs/threat-model.md` says where the boundaries are.
 
 ## Decisions
