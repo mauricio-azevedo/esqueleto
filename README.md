@@ -27,4 +27,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for branches, PRs and CI.
 
 ## License
 
-<SPDX identifier, e.g. MIT>. See [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).
