@@ -1,7 +1,12 @@
-.PHONY: help dev dev-obs down check fmt fmt-check lint typecheck test test-unit build
+-include .env
+APP ?= $(notdir $(CURDIR))
+TAG ?= $(shell git rev-parse --short HEAD)
+IMAGE = $(REGISTRY)/$(APP)
+
+.PHONY: help dev dev-obs down check fmt fmt-check lint typecheck test test-unit build image push deploy
 
 help: ## list targets
-	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{ printf "  %-10s %s\n", $$1, $$2 }'
+	@grep -hE '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{ printf "  %-10s %s\n", $$1, $$2 }'
 
 dev: ## bring everything up locally
 	docker compose up
@@ -34,3 +39,13 @@ test-unit: ## run unit tests only, in seconds
 
 build: ## build artifacts
 	@echo "build: nothing configured"
+
+image: ## build the container image
+	docker build -t $(IMAGE):$(TAG) .
+
+push: image ## push the image to REGISTRY
+	@test -n "$(REGISTRY)" || { echo "REGISTRY is not set; see .env.example"; exit 1; }
+	docker push $(IMAGE):$(TAG)
+
+deploy: push ## deploy this commit to the shared cluster
+	helm upgrade --install $(APP) deploy/ --namespace $(APP) --create-namespace --set image.repository=$(IMAGE) --set image.tag=$(TAG) --wait
