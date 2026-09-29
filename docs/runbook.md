@@ -2,6 +2,8 @@
 
 For whoever is on call and has never seen the code. Commands, not descriptions.
 
+Owner: <name, and how to reach them when it breaks>
+
 ## Deploy and roll back
 
 <How to deploy, how to tell it worked, how to roll back, how to tell that worked.>

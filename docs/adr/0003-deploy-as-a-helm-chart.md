@@ -12,7 +12,7 @@ The service ships a Helm chart in `deploy/`, installed into a namespace named af
 
 ## Consequences
 
-The service never touches the cluster itself; it only owns its namespace. Helm is one more tool to know. The chart is what a GitOps controller would watch if the platform adopts one. Anything the chart assumes about the platform, the collector's address and the ingress class, is a `values.yaml` entry so the assumption is visible.
+The service owns its namespace and nothing outside it; the cluster's own configuration is the platform's. Helm is one more tool to know. The chart is what a GitOps controller would watch if the platform adopts one. Anything the chart assumes about the platform, the collector's address and the ingress class, is a `values.yaml` entry so the assumption is visible.
 
 ## Revisit when
 

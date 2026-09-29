@@ -9,9 +9,11 @@ help: ## list targets
 	@grep -hE '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{ printf "  %-10s %s\n", $$1, $$2 }'
 
 dev: ## bring everything up locally
+	@test -f .env || cp .env.example .env
 	docker compose up
 
 dev-obs: ## dev plus local logs, metrics and traces at http://localhost:3000
+	@test -f .env || cp .env.example .env
 	docker compose --profile observability up
 
 down: ## stop and remove what dev brought up
@@ -47,5 +49,5 @@ push: image ## push the image to REGISTRY
 	@test -n "$(REGISTRY)" || { echo "REGISTRY is not set; see .env.example"; exit 1; }
 	docker push $(IMAGE):$(TAG)
 
-deploy: push ## deploy this commit to the platform cluster
+deploy: push ## deploy this commit to the cluster (ADR 0003)
 	helm upgrade --install $(APP) deploy/ --namespace $(APP) --create-namespace --set image.repository=$(IMAGE) --set image.tag=$(TAG) --wait

@@ -10,7 +10,7 @@ Sharing the dev database means test runs share state with each other and with wh
 
 ## Decision
 
-Tests start their own dependencies with testcontainers. `make test` needs nothing running first. Each run begins with an empty database and ends by discarding it.
+Tests start their own dependencies with testcontainers. `make test` needs no service running first; Docker is the one prerequisite. Each run begins with an empty database and ends by discarding it.
 
 ## Consequences
 

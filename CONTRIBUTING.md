@@ -24,7 +24,7 @@
 
 - `make dev` brings everything up from a fresh clone. It runs `docker compose up`; the services are in `compose.yaml`. `make down` stops and removes them.
 - `make dev-obs` adds a local Grafana with logs, metrics and traces at `http://localhost:3000`, fed by the same OpenTelemetry endpoint the code uses everywhere.
-- Config comes from `.env`, which is not committed. Copy `.env.example` to start. It lists every variable with a safe local default; add a line there when the code reads a new one.
+- Config comes from `.env`, which is not committed. `make dev` creates it from `.env.example` when it is missing. The example lists every variable with a safe local default; add a line there when the code reads a new one.
 
 ## Code
 
@@ -54,14 +54,14 @@ Review checks these too.
 - TDD when you can: the test first, seen failing, then the code. A test that never failed proves nothing. A bug fix starts with the test that reproduces it. `make test-unit` is the loop; it runs in seconds.
 - Test behavior, not implementation. A test that fails on a refactor that changed no behavior is testing the wrong thing.
 - The name states the behavior: `rejects an expired token`, not `testValidate`. A failure should say what broke without opening the file.
-- Real dependencies, not mocks of them. A database test runs against a database that the test starts itself with testcontainers, so `make test` needs nothing running and each run starts clean. Mocks belong at boundaries we don't own.
+- Real dependencies, not mocks of them. A database test runs against a database that the test starts itself with testcontainers, so `make test` needs no service running first, only Docker, and each run starts clean. Mocks belong at boundaries we don't own.
 - Fast and deterministic. No sleeps, no real network, no order dependence. A flaky test is fixed or deleted the day it flakes, never retried.
 - Each kind is owed when its risk exists. Unit: always. Integration: the code touches a database, filesystem, broker or service. Contract: two independently deployed services call each other. E2E: critical paths through the whole system, few. Load: throughput or latency is a requirement. Chaos: availability is; at minimum, a test that kills a dependency and checks the sad path.
 - Unit tests run in `make test-unit`. Unit, integration and contract run in `make test` and `make check`. E2E runs there while it stays fast, otherwise on `main`. Load and chaos run on a schedule or before a release, never in the PR gate.
 
 ## Observability
 
-- Structured logs to stdout, one JSON object per line. The platform collects; the code never opens a log file.
+- Structured logs to stdout, one JSON object per line. The runtime environment collects; the code never opens a log file.
 - One line per unit of work, at the end: who, what, how long, outcome, every field known by then. Not a narrative of steps.
 - A trace id on everything. It arrives on the request or is minted there, goes out on every call, and sits on every log line, span and metric. OpenTelemetry, so the backend is config.
 - Levels mean something. `error`: someone acts. `warn`: degraded, self-healed. `info`: a business event happened. `debug`: off outside development.
@@ -76,7 +76,7 @@ Review checks these too.
 - Nothing goes to production before `docs/production-readiness.md` is walked. Every box is checked or says why not.
 - An ADR that changes the architecture walks it again. The checklist is the gate for operations the way `make check` is for code.
 - Everything deploys on AWS. The [Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/) is the reference for how; its review is part of the checklist.
-- `make deploy` builds the image from `Dockerfile`, pushes it to `REGISTRY`, and installs the Helm chart in `deploy/` on the platform's cluster, in this service's namespace. The cluster belongs to the platform; this repo never touches it.
+- `make deploy` builds the image from `Dockerfile`, pushes it to `REGISTRY`, and installs the Helm chart in `deploy/` on the platform's cluster: a shared Kubernetes cluster run outside this repo by the platform, described in ADR 0003. This repo owns only its namespace there.
 
 ## Quality gate
 
