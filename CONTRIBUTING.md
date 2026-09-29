@@ -16,7 +16,7 @@
 ## Review
 
 - Approve when the change improves the overall health of the codebase, even if it isn't perfect. Block only on what the sections below require. Reference: [Google's code review guide](https://google.github.io/eng-practices/review/).
-- Look in this order: design, behavior, complexity, tests, naming, comments, style. A review that starts at style never reaches design.
+- Look in this order: design, behavior, complexity, tests, naming, comments, style. A review that starts at style never reaches design. For anything spanning systems, design means `docs/design-checklist.md`.
 - Every comment says why. Optional ones start with `Nit:` so the author knows they don't block. Within a business day, or say when.
 - With one person on the project, review is self-review plus an agent review, and the ruleset requires CI only. With a team, one approval.
 
@@ -28,7 +28,7 @@
 
 ## Code
 
-Review checks these. Nothing else does.
+Review checks these. Where a tool does too, the bullet says so.
 
 - Strictest mode the language has. An escape hatch (`any`, `unsafe`, `type: ignore`) means the type isn't understood yet. The linter rejects them.
 - Explicit names. The name says what the thing does, not how it was built.
@@ -36,7 +36,14 @@ Review checks these. Nothing else does.
 - Comments explain why. What is already in the code; if it isn't, fix the code.
 - Errors are handled where there is something to do about them, otherwise they propagate. Queues fail, databases go down, networks flap; the sad path is part of the feature.
 - Adding a dependency is a decision: license, maintenance, size. A large one gets an ADR.
-- Schema migrations live in the PR, run forward only, and work with the version still running. Add, deploy, backfill; drop in a later PR.
+- Durable state and its externally visible effects don't diverge after a partial failure. A row committed with its event never sent, or the reverse, is a design bug, not a network one.
+- Anything that can be retried is safe to run twice, or detects that it already ran.
+- Delivery is at-least-once and unordered until something proves otherwise. Consumers tolerate duplicates; an ordering requirement is written down.
+- Old and new versions run at once during every deploy. So schema migrations live in the PR, run forward only, and work with both: add, deploy, backfill, drop in a later PR. Events and APIs the same: a breaking change keeps the old behavior beside the new until every consumer has moved. The `!` goes on the PR that removes the old behavior, since that is when a correct caller fails.
+- Logic that decides is separate from code that does I/O, so the decision is testable without a database.
+- External systems sit behind an interface this code owns. The database, the broker and the vendor API are details at the edge.
+- Boring technology, unless a concrete benefit is written down; in an ADR if the choice is hard to reverse.
+- A change that spans more than one process, datastore or external system answers `docs/design-checklist.md` before it is built.
 - The HTTP API is `api/openapi.yaml`, the contract. Written first or generated from code, it is committed. The running service serves it at `/openapi.json` with docs at `/docs`; those two paths are outside the contract by convention.
 - A change to the spec that breaks a correct client is a breaking change: `!` in the PR title. `make api-diff`, under `check`, compares the spec with `main` and fails on a breaking change without the `!`.
 - Anything that takes input from the internet meets [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/) Level 1; anything holding personal data, Level 2. `docs/threat-model.md` says where the boundaries are.
