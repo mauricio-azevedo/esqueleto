@@ -37,6 +37,10 @@ spec:
             httpGet:
               path: /healthz
               port: http
+            # A starved process is slow, not dead. Give it time before kubelet kills it.
+            timeoutSeconds: 5
+            periodSeconds: 10
+            failureThreshold: 6
           readinessProbe:
             httpGet:
               path: /readyz

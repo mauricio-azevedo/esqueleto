@@ -8,7 +8,7 @@ Decisions that shape the system are made in PRs and chat, and the reasons are go
 
 ## Decision
 
-Decisions that are hard to reverse get an ADR in `docs/adr/`, in the PR that makes them, using `template.md`. An accepted ADR is not edited; a change of mind is a new ADR that supersedes it.
+Decisions that are hard to reverse get an ADR in `docs/adr/`, in the PR that makes them, using `template.md`. An accepted ADR's body is not edited; a change of mind is a new ADR that supersedes it, and only the old one's status line changes, to point forward.
 
 ## Consequences
 
