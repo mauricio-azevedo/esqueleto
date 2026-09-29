@@ -1,4 +1,4 @@
-.PHONY: help dev dev-obs down check fmt fmt-check lint typecheck test build
+.PHONY: help dev dev-obs down check fmt fmt-check lint typecheck test test-unit build
 
 help: ## list targets
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{ printf "  %-10s %s\n", $$1, $$2 }'
@@ -26,8 +26,11 @@ lint: ## static checks
 typecheck: ## type checks
 	@echo "typecheck: nothing configured"
 
-test: ## run tests
+test: ## run all tests
 	@echo "test: nothing configured"
+
+test-unit: ## run unit tests only, in seconds
+	@echo "test-unit: nothing configured"
 
 build: ## build artifacts
 	@echo "build: nothing configured"

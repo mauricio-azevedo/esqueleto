@@ -43,12 +43,13 @@ Review checks these. Nothing else does.
 Review checks these too.
 
 - Tests are part of the change. A PR that changes behavior changes tests in the same PR, sad path included.
+- TDD when you can: the test first, seen failing, then the code. A test that never failed proves nothing. A bug fix starts with the test that reproduces it. `make test-unit` is the loop; it runs in seconds.
 - Test behavior, not implementation. A test that fails on a refactor that changed no behavior is testing the wrong thing.
 - The name states the behavior: `rejects an expired token`, not `testValidate`. A failure should say what broke without opening the file.
 - Real dependencies, not mocks of them. A database test runs against a database that the test starts itself with testcontainers, so `make test` needs nothing running and each run starts clean. Mocks belong at boundaries we don't own.
 - Fast and deterministic. No sleeps, no real network, no order dependence. A flaky test is fixed or deleted the day it flakes, never retried.
 - Each kind is owed when its risk exists. Unit: always. Integration: the code touches a database, filesystem, broker or service. Contract: two independently deployed services call each other. E2E: critical paths through the whole system, few. Load: throughput or latency is a requirement. Chaos: availability is; at minimum, a test that kills a dependency and checks the sad path.
-- Unit, integration and contract run in `make check`. E2E runs there while it stays fast, otherwise on `main`. Load and chaos run on a schedule or before a release, never in the PR gate.
+- Unit tests run in `make test-unit`. Unit, integration and contract run in `make test` and `make check`. E2E runs there while it stays fast, otherwise on `main`. Load and chaos run on a schedule or before a release, never in the PR gate.
 
 ## Observability
 
