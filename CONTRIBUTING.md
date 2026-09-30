@@ -54,7 +54,7 @@ Review checks these. Where a tool does too, the bullet says so.
 
 - A decision that is hard to reverse, or that a newcomer would ask "why?" about, gets an ADR in `docs/adr/`, in the PR that makes it. Database, sync or async, how services talk. Not naming, not formatting.
 - One file per decision, numbered, from `docs/adr/template.md`. An accepted ADR's body is not edited; a change of mind is a new ADR that supersedes the old one, and only the old one's status line changes, to point forward.
-- A change big enough to have alternatives gets a design doc from `docs/design/template.md` before its ADRs. A done design doc is history and is not edited; the current state is `docs/architecture.md`, `api/openapi.yaml` and the tests, so a design that changes the shape updates `docs/architecture.md` in the same PR.
+- A change big enough to have alternatives gets a design doc from `docs/design/template.md` before its ADRs. Done means every open question is closed or is an issue. A done design doc is not edited; a later design that replaces it is a new doc, and only the old one's status line changes, to point forward. The current state lives in `docs/architecture.md`, `api/openapi.yaml` and the tests, not in design docs; a design that changes the shape updates `docs/architecture.md` in the same PR. The spec and tests already change with the code.
 - Context, decision, consequences, and what would change it, under a page. "Revisit when" is required: a decision that no evidence could overturn is a preference.
 - CONTRIBUTING holds how we work. ADRs hold why the system is shaped the way it is.
 
