@@ -19,6 +19,7 @@
 - Look in this order: design, behavior, complexity, tests, naming, comments, style, documentation. A review that starts at style never reaches design. For anything spanning systems, design means `docs/design-checklist.md`.
 - Every comment says why. Optional ones start with `Nit:` so the author knows they don't block. Within a business day, or say when.
 - With one person on the project, review is self-review plus an agent review, and the ruleset requires CI only. With a team, one approval.
+- A change to a doc, template or config gets a cold review before the PR opens: a reviewer, human or agent, who has not seen the work that produced it reads only the files and answers `docs/cold-review.md`. Code has `make check`; prose has only a reader, and the author's reread cannot find what only the author's context explains.
 
 ## Running locally
 
