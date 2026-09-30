@@ -1,11 +1,11 @@
 # <Title, the change as a sentence>
 
-Status: draft | reviewed | done
+Status: draft | reviewed | done | superseded by NNNN
 Author: <name>. Reviewers: <names>.
 
 ## Context
 
-<What is true now that makes this worth doing. Link the issue.>
+<What is true now that makes this worth doing, and what it assumes but has not verified. Link the issue.>
 
 ## Goals
 
@@ -17,7 +17,7 @@ Author: <name>. Reviewers: <names>.
 
 ## Requirements
 
-<Functional: what it does. Non-functional, as numbers: latency, throughput, availability, data retention, cost.>
+<Functional: what it does. Non-functional, as numbers: latency, throughput, availability, data retention, cost. One per sentence, named like the test that proves it: `rejects an expired token`. A requirement no test proves names what proves it instead: a cost is calculated, an SLO is measured, a log redaction is reviewed. A requirement says what, not how; a sentence only this design satisfies goes under Design.>
 
 ## Design
 
@@ -33,4 +33,4 @@ Author: <name>. Reviewers: <names>.
 
 ## Open questions
 
-<What is still undecided, and who decides it.>
+<What is still undecided, and who decides it. At done, each remaining one links its issue.>
