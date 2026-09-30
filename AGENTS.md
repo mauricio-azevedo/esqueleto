@@ -26,8 +26,9 @@ Before finishing:
 16. Tests are part of the change, sad path included. `make test-unit` is the loop.
 17. A decision that is hard to reverse gets an ADR in the same PR, with "Revisit when" filled.
 18. A change to auth, sessions, input handling, crypto or secrets is checked against the relevant OWASP ASVS chapter and cheat sheet, and the PR's Security section names what was checked.
-19. Say what you did and what you did not verify.
+19. A change to a doc, template or config gets a cold review: an agent that has not seen the work that produced it gets `docs/cold-review.md` and the paths it asks for, nothing else. Fix its findings before the PR opens, or say why not in the PR's What and why.
+20. Say what you did and what you did not verify.
 
 When reviewing:
 
-20. Approve when the change improves the overall health of the codebase. Block only on what `CONTRIBUTING.md` requires. Say why on every comment; `Nit:` on the optional ones.
+21. Approve when the change improves the overall health of the codebase. Block only on what `CONTRIBUTING.md` requires. Say why on every comment; `Nit:` on the optional ones.
