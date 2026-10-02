@@ -6,7 +6,7 @@ First day. If `README.md` still says `<name>`, this project has not started. On 
 |---|---|---|
 | 1 | What value does it deliver, in one sentence | `docs/product.md` Objective; `docs/architecture.md` What it does; issue 1 title |
 | 2 | For whom, and what running it may cost a month | Objective; Targets, monthly cost |
-| 3 | The three most important functions | Requirements |
+| 3 | What it must do, every function the owner can name | Requirements, one row each, ranked in Importance |
 | 4 | How much time to spend before the work stops, finished or not | Issue 1, appetite |
 | 5 | What it deliberately will not do | Out of scope; issue 1, no-gos |
 | 6 | The three quality attributes that matter, ranked | Targets, each as a number |
