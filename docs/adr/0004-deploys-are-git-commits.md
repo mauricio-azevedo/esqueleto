@@ -17,13 +17,13 @@ The image tag has to live in Git for that to work.
 ## Considered Options
 
 * Keep 0003: Helm run from a developer's machine.
-* Argo CD, with the image tag committed to this repo by CI. Blocked by the ruleset, which requires a PR for every change to `main`.
-* Argo CD, with the image tag committed to the platform repo's values file for this service.
-* Argo CD Image Updater, which watches the registry and sets the tag without a commit, at the cost of the running tag not being in any repo.
+* Argo CD, with the image tag committed to this repo by CI.
+* Argo CD, with the image tag committed to the platform repo.
+* Argo CD Image Updater, which watches the registry and sets the tag without a commit.
 
 ## Decision Outcome
 
-Chosen option: "Argo CD, with the image tag committed to the platform repo".
+Chosen option: "Argo CD, with the image tag committed to the platform repo", because the ruleset blocks a CI commit to this repo and Image Updater leaves the running tag in no repo.
 
 The chart stays in `deploy/`, installed into a namespace named after the service, as in 0003. `deploy/application.yaml` declares the Application: chart from this repo, values from the platform repo's `services/<name>/values.yaml`, where the image tag is. A deploy is a commit: a chart change merged to `main` here, or a tag change in that values file. The one command 0003 asked for becomes `git commit` in the platform repo, whose rules decide who may make it.
 

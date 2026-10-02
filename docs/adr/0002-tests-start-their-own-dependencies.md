@@ -27,8 +27,8 @@ Chosen option: "Each test run starts its own throwaway container with testcontai
 
 * Good, because the dev database is never touched by tests.
 * Good, because parallel runs are safe.
-* Bad, because of one library per language and a few seconds of container startup per run.
-* Neutral, because Docker is required to run tests, which it already is for `make dev`.
+* Bad, because each language needs a testcontainers library and each run pays a few seconds of container startup.
+* Bad, because Docker is required to run tests. It already is for `make dev`, so nothing new is installed.
 
 ### Confirmation
 

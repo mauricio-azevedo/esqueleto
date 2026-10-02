@@ -14,11 +14,14 @@ This service runs as a container (`Dockerfile`, `compose.yaml`). The platform pr
 
 ## Considered Options
 
-* A Helm chart in `deploy/`, installed into a namespace named after the service. No other option was recorded when the decision was made.
+* A Helm chart in `deploy/`, installed into a namespace named after the service, on the platform cluster.
+* A cluster, network or account of the service's own, outside the platform.
 
 ## Decision Outcome
 
-Chosen option: "A Helm chart in `deploy/`". `make deploy` builds the image, pushes it to the registry, and runs `helm upgrade --install` tagged with the commit. The chart carries the runtime rules: non-root, read-only filesystem, probes on `/healthz` and `/readyz`, resource requests and limits, a graceful shutdown window.
+Chosen option: "A Helm chart in `deploy/`, installed into a namespace named after the service", because the platform already runs the cluster and a chart is the one file that describes how the service runs there.
+
+`make deploy` builds the image, pushes it to the registry, and runs `helm upgrade --install` tagged with the commit. The chart carries the runtime rules: non-root, read-only filesystem, probes on `/healthz` and `/readyz`, resource requests and limits, a graceful shutdown window.
 
 ### Consequences
 

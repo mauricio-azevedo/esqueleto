@@ -1,5 +1,5 @@
 ---
-# Front matter and sections are MADR 4.0, except "Revisit when" at the end. The ones marked optional may be removed.
+# Front matter and sections are MADR 4.0, plus "Revisit when" at the end. Fields and sections marked optional may be removed.
 status: "<proposed | rejected | accepted | deprecated | superseded by NNNN>"
 date: <YYYY-MM-DD, when the decision was last updated>
 decision-makers: <everyone involved in the decision>
@@ -23,7 +23,7 @@ informed: <optional. Everyone kept up to date, one-way>
 
 ## Decision Outcome
 
-Chosen option: "<option>", because <the justification: the only option that meets a knock-out driver, or the one that comes out best below>.
+Chosen option: "<option>", because <the justification: the only option that passes a driver the others fail, or the one that comes out best below>.
 
 ### Consequences
 
