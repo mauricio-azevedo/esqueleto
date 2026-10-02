@@ -3,8 +3,8 @@
 First day. If `README.md` still says `<name>`, this project has not started. Do these in order, and ask the owner for what only the owner knows: the name, what it does, for whom, the targets. Don't invent them.
 
 1. Open issue 1 with the idea. Every branch starts from an issue, including the first.
-2. `docs/architecture.md`: What it does, and Targets, even rough.
-3. The first design doc, `docs/design/0001-<slug>.md`, from the template: goals, non-goals, requirements, the shape. The ADRs it produces go in `docs/adr/`.
+2. Fill `docs/product.md`: objective, success metrics, requirements, open questions, out of scope.
+3. `docs/architecture.md`: What it does, summarising `docs/product.md`, and Targets, even rough. The decisions this forces go in `docs/adr/`.
 4. `docs/threat-model.md`: What we hold and Who attacks. The rest when the first component exists.
 5. The language: Makefile bodies, the Dockerfile build stage, linter config in strict mode, testcontainers in `test`, a Dependabot block, `.env.example`, `api/openapi.yaml`, `README.md`.
 6. `deploy/values.yaml` resources. `deploy/application.yaml` waits for ADR 0004.

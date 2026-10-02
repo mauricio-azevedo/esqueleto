@@ -1,10 +1,10 @@
 # Architecture
 
-The living overview. A newcomer reads this first. A design that changes the shape updates it in the same PR.
+The living overview. A newcomer reads this first. A change that alters the shape updates it in the same PR.
 
 ## What it does
 
-<One paragraph. What the system does, for whom.>
+<One paragraph. What the system does, for whom. The short form of `docs/product.md`, linked here.>
 
 ## Targets
 
