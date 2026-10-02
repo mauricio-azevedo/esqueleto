@@ -10,13 +10,7 @@ informed: none
 
 ## Context and Problem Statement
 
-Tests that touch a database run against a real one, not a mock (CONTRIBUTING, Testing). That database has to come from somewhere. Where does a test run get its database?
-
-## Decision Drivers
-
-* Test runs must not share state with each other or with development.
-* Two runs at once must not collide.
-* A bad test must not be able to wipe development data.
+Tests that touch a database run against a real one, not a mock (CONTRIBUTING, Testing). That database has to come from somewhere.
 
 ## Considered Options
 
@@ -25,7 +19,9 @@ Tests that touch a database run against a real one, not a mock (CONTRIBUTING, Te
 
 ## Decision Outcome
 
-Chosen option: "Each test run starts its own throwaway container with testcontainers", because it is the only option that meets all three drivers: each run begins with an empty database and ends by discarding it. `make test` needs no service running first; Docker is the one prerequisite.
+Chosen option: "Each test run starts its own throwaway container with testcontainers". Sharing the dev database means test runs share state with each other and with whatever the developer was doing. Cleanup becomes every test's job, two runs at once collide, and a bad test can wipe development data. Those are the usual sources of order-dependent and flaky database tests.
+
+`make test` needs no service running first; Docker is the one prerequisite. Each run begins with an empty database and ends by discarding it.
 
 ### Consequences
 
@@ -36,25 +32,7 @@ Chosen option: "Each test run starts its own throwaway container with testcontai
 
 ### Confirmation
 
-`make test` passes on a machine with Docker and no service started. CI runs it without service containers.
-
-## Pros and Cons of the Options
-
-### The database `make dev` runs
-
-* Good, because no library and no startup time.
-* Bad, because runs share state with each other and with whatever the developer was doing, so cleanup becomes every test's job.
-* Bad, because two runs at once collide, and a bad test can wipe development data. These are the usual sources of order-dependent and flaky database tests.
-
-### Testcontainers
-
-* Good, because each run starts empty and ends discarded.
-* Good, because the library exists for the languages a service here is likely to use.
-* Bad, because a few seconds of startup per run.
-
-## More Information
-
-[Testcontainers](https://testcontainers.com/).
+`make test` passes with no service started.
 
 ## Revisit when
 
