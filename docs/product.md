@@ -1,6 +1,6 @@
 # Product requirements
 
-What the system does and for whom, in [Atlassian's product requirements template](https://www.atlassian.com/software/confluence/templates/product-requirements). Release dates, owners and tracking live in the issue tracker, not here. `docs/architecture.md` summarises this file and links here.
+What the system does and for whom, in [Atlassian's product requirements template](https://www.atlassian.com/software/confluence/templates/product-requirements), plus an ID per requirement so tests, ADRs and PRs can cite one. Release dates, owners and tracking live in the issue tracker, not here. `docs/architecture.md` summarises this file and links here.
 
 ## Objective
 
@@ -16,9 +16,9 @@ What the system does and for whom, in [Atlassian's product requirements template
 
 ## Requirements
 
-| Requirement | User story | Importance | Notes |
-|---|---|---|---|
-| <what the system does, one sentence> | <as a ..., I want ..., so that ...> | <must, should, could> | <what proves it: the test named for it, the SLO measured, the cost calculated. Constraints, links.> |
+| ID | Requirement | User story | Importance | Notes |
+|---|---|---|---|---|
+| <FR-NNN, sequential, never reused. Functional only; qualities are Targets in `docs/architecture.md`> | <what the system does, one sentence> | <as a ..., I want ..., so that ...> | <must, should, could> | <what proves it: the test named for it, the SLO measured, the cost calculated. Constraints, links.> |
 
 ## Supporting documentation
 
